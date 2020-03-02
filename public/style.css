@@ -1,0 +1,20 @@
+body {
+	background: #00ff00;
+}
+
+#chatroom{
+	height: 500px;
+	display: none;
+	background: #d2e6c8;
+	/*background-image: url("cat.jpg");
+	background-repeat: no-repeat;*/
+
+	margin: 100px;
+			position: relative;
+}
+
+#chatbox {
+	padding:10px; 
+	height: 400px; 
+	overflow-y: scroll;
+}
