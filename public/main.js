@@ -1,13 +1,17 @@
-	var socket = io.connect('http://localhost:8080');
+	//var socket = io.connect('http://localhost:8080');
+	
+	var socket = io();
+
 	var displayMessage=""; //string of messages
 	
 	socket.on('messages', function (data){
-		//alert(data.alertBox);
+		alert(data.alertBox);
 	});
 
 	socket.on('submission', function (data){
 		displayMessage += data.clientName + " : "+data.content + "<br>";
 		display();
+
 		// console.log(data);
 		//alert(data.content);
 	});

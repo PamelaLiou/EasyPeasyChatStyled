@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 8080;
+const path = require('path');
+
 var allClients="";
 
 server.listen(port, function(){
@@ -23,7 +25,7 @@ io.on('connection',function(client){
 		client.broadcast.emit('submission',  {
 			clientName: client.clientName,
 			content: data});
-		console.log("submission: " + data);
+		console.log("submission: " + client.clientName + " " + data);
 	});
 
 	client.on('getOthersNames', function(){
@@ -32,8 +34,12 @@ io.on('connection',function(client){
 	});
 
 });
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(__dirname + '/public'));
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, +'public/index.html'));
+});
+//app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req,res){
 	console.log('serving index.html');
